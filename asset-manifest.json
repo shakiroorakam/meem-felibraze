@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/meem-felibraze/static/js/main.1cfb7a78.js",
-    "static/media/Logo.png": "/meem-felibraze/static/media/Logo.53db290e65508363a2e1.png",
-    "index.html": "/meem-felibraze/index.html",
-    "main.1cfb7a78.js.map": "/meem-felibraze/static/js/main.1cfb7a78.js.map"
+    "main.js": "/static/js/main.1f69dddd.js",
+    "static/media/Logo.png": "/static/media/Logo.53db290e65508363a2e1.png",
+    "index.html": "/index.html",
+    "main.1f69dddd.js.map": "/static/js/main.1f69dddd.js.map"
   },
   "entrypoints": [
-    "static/js/main.1cfb7a78.js"
+    "static/js/main.1f69dddd.js"
   ]
 }
