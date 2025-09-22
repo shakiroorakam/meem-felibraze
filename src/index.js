@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+// 1. Import HashRouter instead of BrowserRouter
+import { HashRouter } from 'react-router-dom';
 import App from './App';
-
-// This reads the "homepage" field from your package.json
-const basename = process.env.PUBLIC_URL;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={basename}>
+    {/* 2. Use HashRouter here */}
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 
