@@ -1,9 +1,10 @@
 // --- Data for Plans ---
 // I've added a 'type' property to each plan for easier logic handling.
 const sessionPlans = [
-    { name: 'Free', price: 'Free', type: 'session', description: 'Perfect for exploring our sessions', features: ['Access to All Sessions', '15% Discount on All Books'], buttonText: 'Get Started' },
+    { name: 'Free', price: '0', type: 'session', description: 'Perfect for exploring our sessions', features: ['Access to All Sessions', '15% Discount on All Books'], buttonText: 'Get Started' },
     { name: 'Basic', price: '100', type: 'session', description: 'Great for individual participants', features: ['Access to All Sessions', 'Badge & Note', 'Certificate of Participation', 'Accommodation', '20% Discount on All Books'], buttonText: 'Choose Basic' },
-    { name: 'Premium', price: '200', type: 'session', description: 'Enhanced experience with full benefits', features: ['Access to All Sessions', 'Badge & Note', 'Certificate of Participation', 'Two Day Food & Accommodation', '25% Discount on All Books'], buttonText: 'Choose Premium' },
+    { name: 'Medium', price: '200', type: 'session', description: 'Enhanced experience with limited benefits', features: ['Access to All Sessions', 'Badge & Note', 'Certificate of Participation', 'Two Day Food & Accommodation', '25% Discount on All Books'], buttonText: 'Choose Premium' },
+    { name: 'Premium', price: '300', type: 'session', description: 'Enhanced experience with full benefits', features: ['Access to All Sessions','Badge & Note','Certification of Participation','Two Day Food & Accommodation','Free Entry for Expo', '30 % Discount on All Books'], buttonText: 'Choose Premium' },
 ];
 
 const workshopPlans = [

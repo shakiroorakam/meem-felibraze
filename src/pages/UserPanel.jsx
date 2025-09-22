@@ -1,7 +1,7 @@
 import React from 'react';
-import { sessionPlans, workshopPlans } from '../data/plans.js';
-import PricingCard from '../components/PricingCard.jsx';
-import { FeatureIcon, AllSessionsIcon, CertificationIcon, BookDiscountsIcon } from '../components/icons/FeatureIcons.jsx';
+import { sessionPlans, workshopPlans } from '../data/plans';
+import PricingCard from '../components/PricingCard';
+import { FeatureIcon, AllSessionsIcon, CertificationIcon, BookDiscountsIcon } from '../components/icons/FeatureIcons';
 
 const UserPanel = ({ onSelectPlan }) => (
     <div className="bg-white">
@@ -18,9 +18,10 @@ const UserPanel = ({ onSelectPlan }) => (
                 <h2 className="h1 fw-bold text-body-emphasis" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Session Plans</h2>
                 <p className="text-muted col-lg-5 mx-auto">Access our comprehensive sessions with varying levels of benefits.</p>
             </div>
-            <div className="row justify-content-center g-4 mt-3">
+            {/* --- UPDATED GRID FOR 4 CARDS --- */}
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-3">
                 {sessionPlans.map(plan => 
-                    <div key={plan.name} className="col-12 col-md-6 col-lg-4">
+                    <div key={plan.name} className="col">
                         <PricingCard plan={plan} onSelectPlan={onSelectPlan} />
                     </div>
                 )}
@@ -30,9 +31,10 @@ const UserPanel = ({ onSelectPlan }) => (
                 <h2 className="h1 fw-bold text-body-emphasis" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Workshop Plans</h2>
                 <p className="text-muted col-lg-5 mx-auto">Intensive hands-on workshops with comprehensive accommodation and learning materials.</p>
             </div>
+            {/* --- UPDATED GRID FOR LARGER WORKSHOP CARDS --- */}
             <div className="row justify-content-center g-4 mt-3">
                 {workshopPlans.map(plan => 
-                    <div key={plan.name} className="col-12 col-md-6 col-lg-4">
+                    <div key={plan.name} className="col-12 col-md-6 col-lg-5">
                         <PricingCard plan={plan} onSelectPlan={onSelectPlan} />
                     </div>
                 )}
