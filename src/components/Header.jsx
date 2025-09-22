@@ -1,12 +1,20 @@
 import React from 'react';
+import logo from '../components/Logo.png';
 
 const Header = ({ onNavigate }) => (
     <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
         <div className="container">
-            <a className="navbar-brand" href="#">
-                <img src="https://placehold.co/40x40/ffc107/495057?text=ER" alt="EventReg Logo" className="d-inline-block align-text-top rounded me-2" />
-                EventReg
-            </a>
+            <a className="navbar-brand" href="/">
+    <img 
+  src={logo} 
+  alt="EventReg Logo" 
+  className="d-inline-block align-text-top rounded me-2" 
+  style={{ width: '130px', height: 'auto' }} 
+/>
+
+</a>
+
+            
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
