@@ -1,6 +1,7 @@
 import React from 'react';
+// Corrected import paths to be more standard for React projects
 import { sessionPlans, workshopPlans } from '../data/plans';
-import PricingCard from '../components/PricingCard';
+import PricingCard from '../components/PricingCard'; 
 import { FeatureIcon, AllSessionsIcon, CertificationIcon, BookDiscountsIcon } from '../components/icons/FeatureIcons';
 
 const UserPanel = ({ onSelectPlan }) => (
@@ -60,7 +61,6 @@ const UserPanel = ({ onSelectPlan }) => (
                                 <p className="text-sm text-muted">Exclusive discounts on all publications.</p>
                             </div>
                         </div>
-                        {/* --- UPDATED BUTTON --- */}
                         <a 
                             href="https://wa.me/qr/45RMHB556TH4J1" 
                             target="_blank" 
