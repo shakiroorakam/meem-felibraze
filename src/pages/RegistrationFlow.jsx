@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// Corrected import paths
 import { db, storage } from '../firebase.js';
 import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -15,11 +14,9 @@ const RegistrationFlow = ({ plan, onBack, onRegistrationComplete }) => {
 
     const handleDetailsSubmit = (details) => {
         setUserDetails(details);
-        // If the plan price is 'Free' or '0', skip the payment step.
         if (plan.price === 'Free' || plan.price === '0') {
             handleFreePlanSubmission(details);
         } else {
-            // Otherwise, proceed to the manual payment step.
             setStep(2);
         }
     };
@@ -30,29 +27,21 @@ const RegistrationFlow = ({ plan, onBack, onRegistrationComplete }) => {
         setRegistrationId(newRegistrationId);
         
         try {
-            let publishedWorkUrl = null;
-            if (details.publishedWorkFile) {
-                const workRef = ref(storage, `published_works/${newRegistrationId}/${details.publishedWorkFile.name}`);
-                const workSnapshot = await uploadBytes(workRef, details.publishedWorkFile);
-                publishedWorkUrl = await getDownloadURL(workSnapshot.ref);
-            }
-
             const registrationDocRef = doc(db, 'registrations', newRegistrationId);
             await setDoc(registrationDocRef, {
                 name: details.name,
                 place: details.place,
                 mobile: details.mobile,
-                publishedWorkUrl,
+                // publishedWorkUrl is removed
                 planName: plan.name,
                 planPrice: plan.price,
-                status: 'approved', // Free plans are automatically approved.
+                status: 'approved',
                 timestamp: new Date(),
             });
-
+            setUserDetails(details);
             setStep(3);
-        
         } catch (error) {
-             console.error("Error submitting free registration:", error);
+            console.error("Error submitting free registration:", error);
             alert("There was an error submitting your registration. Please try again.");
         } finally {
             setIsSubmitting(false);
@@ -63,9 +52,7 @@ const RegistrationFlow = ({ plan, onBack, onRegistrationComplete }) => {
         if (!userDetails || !screenshotFile || !transactionId) return;
         
         setIsSubmitting(true);
-
         try {
-            // Check for duplicate transaction ID
             const registrationsRef = collection(db, 'registrations');
             const q = query(registrationsRef, where("transactionId", "==", transactionId.trim()));
             const querySnapshot = await getDocs(q);
@@ -83,19 +70,12 @@ const RegistrationFlow = ({ plan, onBack, onRegistrationComplete }) => {
             const screenshotSnapshot = await uploadBytes(screenshotRef, screenshotFile);
             const screenshotUrl = await getDownloadURL(screenshotSnapshot.ref);
 
-            let publishedWorkUrl = null;
-            if (userDetails.publishedWorkFile) {
-                const workRef = ref(storage, `published_works/${newRegistrationId}/${userDetails.publishedWorkFile.name}`);
-                const workSnapshot = await uploadBytes(workRef, userDetails.publishedWorkFile);
-                publishedWorkUrl = await getDownloadURL(workSnapshot.ref);
-            }
-
             const registrationDocRef = doc(db, 'registrations', newRegistrationId);
             await setDoc(registrationDocRef, {
                 name: userDetails.name,
                 place: userDetails.place,
                 mobile: userDetails.mobile,
-                publishedWorkUrl,
+                // publishedWorkUrl is removed
                 planName: plan.name,
                 planPrice: plan.price,
                 transactionId: transactionId.trim(),
@@ -103,9 +83,7 @@ const RegistrationFlow = ({ plan, onBack, onRegistrationComplete }) => {
                 status: 'pending',
                 timestamp: new Date(),
             });
-
             setStep(3);
-
         } catch (error) {
             console.error("Error submitting registration:", error);
             alert("There was an error submitting your registration. Please try again.");
@@ -142,4 +120,5 @@ const RegistrationFlow = ({ plan, onBack, onRegistrationComplete }) => {
 };
 
 export default RegistrationFlow;
+
 
