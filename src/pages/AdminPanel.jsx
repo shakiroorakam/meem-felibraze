@@ -26,7 +26,7 @@ const AdminPanel = ({ onLogout }) => {
             const querySnapshot = await getDocs(q);
             const regs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setRegistrations(regs);
-        } catch (error) { // Added curly braces here to fix the syntax error
+        } catch (error) {
             console.error("Error fetching registrations: ", error);
         }
         setIsLoading(false);
@@ -54,7 +54,6 @@ const AdminPanel = ({ onLogout }) => {
         }
     };
 
-    // Group registrations by plan name
     const groupedRegistrations = registrations.reduce((acc, registration) => {
         const planName = registration.planName || 'Uncategorized';
         if (!acc[planName]) {
@@ -64,7 +63,6 @@ const AdminPanel = ({ onLogout }) => {
         return acc;
     }, {});
 
-    // Helper to create valid HTML IDs from plan names
     const createIdFromString = (str) => str.replace(/\s+/g, '-');
 
     return (
@@ -85,7 +83,6 @@ const AdminPanel = ({ onLogout }) => {
                 <div className="alert alert-secondary">No registrations found.</div>
             ) : (
                 <div className="accordion" id="registrationsAccordion">
-                    {/* Map over each group of registrations to create an accordion item */}
                     {Object.keys(groupedRegistrations).sort().map(planName => {
                         const planId = createIdFromString(planName);
                         return (
@@ -105,7 +102,6 @@ const AdminPanel = ({ onLogout }) => {
                                                         <tr>
                                                             <th scope="col" className="p-3">QR Code</th>
                                                             <th scope="col" className="p-3">Details</th>
-                                                            <th scope="col" className="p-3">Published Work</th>
                                                             <th scope="col" className="p-3">Transaction ID</th>
                                                             <th scope="col" className="p-3">Screenshot</th>
                                                             <th scope="col" className="p-3">Status</th>
@@ -123,11 +119,6 @@ const AdminPanel = ({ onLogout }) => {
                                                                     <div><strong>{reg.name}</strong></div>
                                                                     <small className="text-muted">{reg.place}</small><br/>
                                                                     <small className="text-muted">{reg.mobile}</small>
-                                                                </td>
-                                                                <td className="p-3">
-                                                                    {reg.publishedWorkUrl ? (
-                                                                        <a href={reg.publishedWorkUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline-info">View Work</a>
-                                                                    ) : (<span className="text-muted">N/A</span>)}
                                                                 </td>
                                                                 <td className="p-3">{reg.transactionId || <span className="text-muted">N/A</span>}</td>
                                                                 <td className="p-3">
@@ -164,4 +155,5 @@ const AdminPanel = ({ onLogout }) => {
 };
 
 export default AdminPanel;
+
 
