@@ -4,38 +4,22 @@ const UserDetailsForm = ({ plan, onSubmit, onBack }) => {
     const [name, setName] = useState('');
     const [place, setPlace] = useState('');
     const [mobile, setMobile] = useState('');
-    const [publishedWorkFile, setPublishedWorkFile] = useState(null);
-    const [workFileName, setWorkFileName] = useState('No file chosen');
-
-    // Conditionally render the upload field based on the plan type
-    const isWorkshop = plan.type === 'workshop';
-
-    const handleWorkFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size > 5 * 1024 * 1024) {
-                alert("File is too large. Please upload a document under 5MB.");
-                e.target.value = null;
-                return;
-            }
-            setPublishedWorkFile(file);
-            setWorkFileName(file.name);
-        }
-    };
+    const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // The published work is only mandatory if it's a workshop
-        if (!name || !place || !mobile || (isWorkshop && !publishedWorkFile)) {
-            alert("Please fill in all mandatory fields.");
+        setError('');
+        if (!name || !place || !mobile) {
+            setError("Please fill in all fields.");
             return;
         }
-        onSubmit({ name, place, mobile, publishedWorkFile });
+        // No longer passing a file, just the text details
+        onSubmit({ name, place, mobile });
     };
 
     return (
         <div className="d-flex align-items-center bg-light" style={{ minHeight: 'calc(100vh - 56px)' }}>
-            <div className="container py-4">
+            <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-5">
                         <div className="card shadow-lg p-4">
@@ -57,25 +41,11 @@ const UserDetailsForm = ({ plan, onSubmit, onBack }) => {
                                         <input id="mobile" type="tel" required value={mobile} onChange={(e) => setMobile(e.target.value)} className="form-control form-control-lg" placeholder="Mobile Number" />
                                     </div>
                                     
-                                    {/* Conditional rendering for the Published Works field */}
-                                    {isWorkshop && (
-                                        <div className="mb-3">
-                                            <label htmlFor="publishedWork" className="form-label">Published Works (PDF, DOC, DOCX - Max 5MB)</label>
-                                             <input
-                                                type="file"
-                                                id="publishedWork"
-                                                className="form-control"
-                                                required
-                                                accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                                                onChange={handleWorkFileChange}
-                                            />
-                                            <div className="form-text">{workFileName}</div>
-                                        </div>
-                                    )}
+                                    {error && <div className="alert alert-danger p-2">{error}</div>}
 
                                     <div className="d-grid mt-4">
                                         <button type="submit" className="btn btn-dark btn-lg">
-                                            {plan.price === 'free' ? 'Complete Registration' : 'Proceed to Payment'}
+                                            {plan.price === 'Free' || plan.price === '0' ? 'Complete Registration' : 'Proceed to Payment'}
                                         </button>
                                     </div>
                                 </form>
@@ -94,4 +64,5 @@ const UserDetailsForm = ({ plan, onSubmit, onBack }) => {
 };
 
 export default UserDetailsForm;
+
 
