@@ -75,7 +75,7 @@ const UserDetailsForm = ({ plan, onSubmit, onBack }) => {
 
                                     <div className="d-grid mt-4">
                                         <button type="submit" className="btn btn-dark btn-lg">
-                                            {plan.price === 'Free' ? 'Complete Registration' : 'Proceed to Payment'}
+                                            {plan.price === 'free' ? 'Complete Registration' : 'Proceed to Payment'}
                                         </button>
                                     </div>
                                 </form>

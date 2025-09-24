@@ -18,7 +18,6 @@ const UserPanel = ({ onSelectPlan }) => (
                 <h2 className="h1 fw-bold text-body-emphasis" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Session Plans</h2>
                 <p className="text-muted col-lg-5 mx-auto">Access our comprehensive sessions with varying levels of benefits.</p>
             </div>
-            {/* --- UPDATED GRID FOR 4 CARDS --- */}
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-3">
                 {sessionPlans.map(plan => 
                     <div key={plan.name} className="col">
@@ -31,10 +30,9 @@ const UserPanel = ({ onSelectPlan }) => (
                 <h2 className="h1 fw-bold text-body-emphasis" style={{ fontFamily: "'Times New Roman', Times, serif" }}>Workshop Plans</h2>
                 <p className="text-muted col-lg-5 mx-auto">Intensive hands-on workshops with comprehensive accommodation and learning materials.</p>
             </div>
-            {/* --- UPDATED GRID FOR LARGER WORKSHOP CARDS --- */}
-            <div className="row justify-content-center g-4 mt-3">
-                {workshopPlans.map(plan => 
-                    <div key={plan.name} className="col-12 col-md-6 col-lg-5">
+            <div className="row row-cols-1 row-cols-md-2 g-4 mt-3 justify-content-center">
+                 {workshopPlans.map(plan => 
+                    <div key={plan.name} className="col-lg-5">
                         <PricingCard plan={plan} onSelectPlan={onSelectPlan} />
                     </div>
                 )}
@@ -62,7 +60,15 @@ const UserPanel = ({ onSelectPlan }) => (
                                 <p className="text-sm text-muted">Exclusive discounts on all publications.</p>
                             </div>
                         </div>
-                        <button className="btn btn-outline-warning btn-lg mt-4">Contact Us</button>
+                        {/* --- UPDATED BUTTON --- */}
+                        <a 
+                            href="https://wa.me/qr/45RMHB556TH4J1" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-outline-warning btn-lg mt-4"
+                        >
+                            Contact Us
+                        </a>
                     </div>
                 </div>
             </div>
